@@ -8,6 +8,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -39,6 +41,11 @@ public class Student {
     @Column()
     private String matricNo;
 
+    @NotBlank(message = "registration Date cannot be empty")
+    @Column()
+    private String yearOfRegistration;
+
+
     @NotBlank(message = "state cannot be empty")
     @NotBlank
     @Size(max = 50)
@@ -67,8 +74,9 @@ public class Student {
     @Column(length = 20)
     private Integer emergencyContact;
 
-
-
+    @OneToOne()
+    @JoinColumn(name="student-department", referencedColumnName = "id", insertable = false, updatable = false)
+    private Department department;
 
 
 }

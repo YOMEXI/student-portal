@@ -1,17 +1,22 @@
 package schoolportalapi.portal.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Entity
 @Table(name = "faculty")
 public class Faculty {
 
@@ -25,11 +30,12 @@ public class Faculty {
     private String facultyName;
 
     @NotBlank(message = "Faculty code cannot be empty")
-    @Size(max = 4,message = "Faculty name cannot be more than 4 characters")
+    @Size(max = 4,message = "Faculty code cannot be more than 4 characters")
     @Column(unique = true, nullable = false, length = 4)
     private String facultyCode;
 
-    @OneToMany(mappedBy = "departments",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "faculty",fetch = FetchType.EAGER,cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Department> departments;
 
 

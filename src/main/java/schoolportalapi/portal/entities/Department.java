@@ -1,17 +1,21 @@
 package schoolportalapi.portal.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Entity
 @Table(name = "department")
 public class Department {
     @Id
@@ -30,6 +34,8 @@ public class Department {
     private String departmentCode;
 
 
+
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "faculty", nullable = false)
     private Faculty faculty;
