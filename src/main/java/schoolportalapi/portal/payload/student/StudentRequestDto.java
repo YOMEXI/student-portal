@@ -17,8 +17,7 @@ public class StudentRequestDto {
 
     private String middleName;
 
-
-    private Integer phone;
+    private String phoneNo;
 
     private String registrationNumber;
 
@@ -26,12 +25,11 @@ public class StudentRequestDto {
 
     private String state;
 
-    private String lga;
 
     private String course;
 
+    private String yearOfRegistration;
     private String gender;
-
 
     private String email;
 

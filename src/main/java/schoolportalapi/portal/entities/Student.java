@@ -34,27 +34,22 @@ public class Student {
 
     @NotBlank(message = "phone number cannot be empty")
     @Column(nullable = false, length = 20)
-    private Integer phone;
+    private String phoneNo;
     @NotBlank(message = "registration Number cannot be empty")
     @Column(nullable = false, length = 40)
     private String registrationNumber;
     @Column()
     private String matricNo;
 
-    @NotBlank(message = "registration Date cannot be empty")
+    @NotBlank(message = "registration Year cannot be empty")
     @Column()
     private String yearOfRegistration;
-
 
     @NotBlank(message = "state cannot be empty")
     @NotBlank
     @Size(max = 50)
     @Column(length = 150,nullable = false)
     private String state;
-    @NotBlank(message = "lga cannot be empty")
-    @Size(max = 100)
-    @Column(length = 100,nullable = false)
-    private String lga;
     @NotBlank(message = "course cannot be empty")
     @Size(max = 100)
     @Column(length = 100,nullable = false)

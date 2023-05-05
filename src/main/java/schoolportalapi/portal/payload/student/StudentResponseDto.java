@@ -16,7 +16,7 @@ public class StudentResponseDto {
     private String middleName;
 
 
-    private Integer phone;
+    private String phoneNo;
 
     private String registrationNumber;
 
