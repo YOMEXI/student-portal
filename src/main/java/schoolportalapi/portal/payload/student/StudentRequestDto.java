@@ -1,12 +1,8 @@
 package schoolportalapi.portal.payload.student;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+
 import lombok.Data;
-import schoolportalapi.portal.entities.Department;
+
 
 @Data
 public class StudentRequestDto {
@@ -24,6 +20,7 @@ public class StudentRequestDto {
     private String matricNo;
 
     private String state;
+    private Long dateOfBirth;
 
 
     private String course;

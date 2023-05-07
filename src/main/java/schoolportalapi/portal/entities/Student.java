@@ -1,5 +1,6 @@
 package schoolportalapi.portal.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -8,6 +9,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -68,6 +70,11 @@ public class Student {
     private String email;
     @Column(length = 20)
     private Integer emergencyContact;
+
+    @NotBlank
+    @NotEmpty(message = "date of Birth cannot be empty")
+    @Column()
+    private Long dateOfBirth;
 
     @OneToOne()
     @JoinColumn(name="student-department", referencedColumnName = "id", insertable = false, updatable = false)

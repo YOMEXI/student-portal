@@ -32,6 +32,23 @@ public class DepartmentServiceImpl implements DepartmentService {
     FacultyRepository facultyRepository;
     @Override
     public DepartmentResponseDto createDepartment(DepartmentRequestDto departmentRequestDto) {
+
+        Optional<Department> ifDepartmentNameExist = departmentRepository
+                .findByDepartmentName(departmentRequestDto.getDepartmentName());
+
+       Optional<Department>  ifDepartmentCodeExist= departmentRepository
+                .findByDepartmentCode(departmentRequestDto.getDepartmentCode());
+
+
+        if (ifDepartmentNameExist.isPresent())
+            throw new CustomApiException(HttpStatus.BAD_REQUEST,
+                    "Department name Already Assigned please try again");
+
+        if (ifDepartmentCodeExist.isPresent())
+            throw new CustomApiException(
+                    HttpStatus.BAD_REQUEST,"Department Code already Exists");
+
+
         Department newDepartment = new Department();
         newDepartment.setDepartmentName(departmentRequestDto.getDepartmentName());
         newDepartment.setDepartmentCode(departmentRequestDto.getDepartmentCode());

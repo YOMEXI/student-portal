@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 import schoolportalapi.portal.exception.CustomApiException;
 import schoolportalapi.portal.repository.StudentRepostory;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 @Component
@@ -15,7 +18,8 @@ public class studentHelperMethods {
     @Autowired
     StudentRepostory studentRepostory;
 
-    public String createStudentRegistrationNo(String facultyCode, String departmentCode,String yearOfRegistration){
+    public String createStudentRegistrationNo(String facultyCode,
+                                              String departmentCode,String yearOfRegistration){
 
         Long randomNo = 100 + new Random().nextLong(900);
 
@@ -33,4 +37,5 @@ public class studentHelperMethods {
 
             return regNo;
     }
+
 }

@@ -16,6 +16,7 @@ import schoolportalapi.portal.repository.FacultyRepository;
 import schoolportalapi.portal.repository.StudentRepostory;
 import schoolportalapi.portal.service.StudentService;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -45,6 +46,7 @@ public class StudentServiceImpl implements StudentService {
         newStudent.setPhoneNo(studentRequestDto.getPhoneNo());
         newStudent.setEmergencyContact(studentRequestDto.getEmergencyContact());
        newStudent.setState(studentRequestDto.getState());
+        newStudent.setDateOfBirth(studentRequestDto.getDateOfBirth());
        newStudent.setYearOfRegistration(studentRequestDto.getYearOfRegistration());
 
        Optional<Department> studentsDepartment = departmentRepository
