@@ -1,6 +1,9 @@
 package schoolportalapi.portal.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,8 +26,17 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "firstName cannot be empty")
+    @Size(max = 40,message = "firstName  cannot be more than 40 characters")
+    @Column(nullable = false, length = 40)
     private String firstName;
+
+    @NotBlank(message = "lastName cannot be empty")
+    @Size(max = 40,message = "lastName  cannot be more than 40 characters")
+    @Column(nullable = false, length = 40)
     private String lastName;
+
+
     private String password;
     private String email;
 

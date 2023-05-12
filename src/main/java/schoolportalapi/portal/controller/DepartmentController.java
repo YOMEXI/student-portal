@@ -11,6 +11,7 @@ import schoolportalapi.portal.service.DepartmentService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/v1/department")
 public class DepartmentController {
