@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import schoolportalapi.portal.exception.AuthEntryPointJwt;
 import schoolportalapi.portal.repository.UserRepository;
 
 @Configuration
@@ -44,4 +45,8 @@ public class AppConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public AuthEntryPointJwt unauthorizedHandler() {
+        return new AuthEntryPointJwt();
+    }
 }

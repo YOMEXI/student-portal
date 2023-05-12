@@ -7,5 +7,5 @@ import schoolportalapi.portal.payload.auth.RegisterRequest;
 
 public interface UserService {
     ResponseEntity<?> register(RegisterRequest registerRequest);
-    AuthenticationResponse login(AuthenticationRequest authenticationRequest);
+    ResponseEntity<?> login(AuthenticationRequest authenticationRequest);
 }
