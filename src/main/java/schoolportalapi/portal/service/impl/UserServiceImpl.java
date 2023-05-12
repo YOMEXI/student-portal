@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
                             "User Already Exists");
 
 
-        var userRole = roleRepository.findById(registerRequest.getRoleId())
+        var userRole = roleRepository.findById(2L)
                 .orElseThrow(()->new CustomApiException(HttpStatus.BAD_REQUEST,
                         "Role does not exist"));
 
