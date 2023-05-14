@@ -76,7 +76,7 @@ public class Student {
     @NotBlank
     @NotEmpty(message = "date of Birth cannot be empty")
     @Column()
-    private Long dateOfBirth;
+    private String dateOfBirth;
 
     @OneToOne()
     @JoinColumn(name="student-department", referencedColumnName = "id", insertable = false, updatable = false)

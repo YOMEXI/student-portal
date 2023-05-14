@@ -14,8 +14,6 @@ public class StudentResponseDto {
 
     private String middleName;
 
-
-
     private String phoneNo;
 
     private String registrationNumber;
@@ -24,7 +22,7 @@ public class StudentResponseDto {
 
     private String state;
 
-    private Long dateOfBirth;
+    private String dateOfBirth;
     private String course;
 
     private String gender;

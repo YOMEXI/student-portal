@@ -20,7 +20,7 @@ public class StudentRequestDto {
     private String matricNo;
 
     private String state;
-    private Long dateOfBirth;
+    private String dateOfBirth;
 
 
     private String course;

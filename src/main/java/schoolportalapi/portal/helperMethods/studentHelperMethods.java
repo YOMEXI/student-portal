@@ -5,18 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import schoolportalapi.portal.exception.CustomApiException;
-import schoolportalapi.portal.repository.StudentRepostory;
+import schoolportalapi.portal.repository.StudentRepository;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 @Component
 public class studentHelperMethods {
 
     @Autowired
-    StudentRepostory studentRepostory;
+    StudentRepository studentRepostory;
 
     public String createStudentRegistrationNo(String facultyCode,
                                               String departmentCode,String yearOfRegistration){

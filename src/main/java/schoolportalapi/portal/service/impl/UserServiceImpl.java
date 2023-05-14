@@ -18,6 +18,7 @@ import schoolportalapi.portal.payload.auth.RegisterRequest;
 import schoolportalapi.portal.repository.RoleRepository;
 import schoolportalapi.portal.repository.UserRepository;
 import schoolportalapi.portal.service.UserService;
+import schoolportalapi.portal.utils.constants.AuthConstants;
 
 import java.util.Collections;
 import java.util.List;
@@ -50,11 +51,11 @@ public class UserServiceImpl implements UserService {
                             "User Already Exists");
 
 
-        var userRole = roleRepository.findById(2L)
+        var userRole = roleRepository.findById(AuthConstants.userRoleId)
                 .orElseThrow(()->new CustomApiException(HttpStatus.BAD_REQUEST,
                         "Role does not exist"));
 
-        var newUser = new User();
+        User newUser = new User();
         newUser.setEmail(registerRequest.getEmail());
         newUser.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         newUser.setFirstName(registerRequest.getFirstName());
@@ -79,7 +80,7 @@ public class UserServiceImpl implements UserService {
                 ,ifUserExist.get().getPassword());
 
         if(!comparePassword)
-            throw new CustomApiException(HttpStatus.BAD_REQUEST,"Bad credentials inputed");
+            throw new CustomApiException(HttpStatus.BAD_REQUEST,"Bad credentials inputted");
 
 
       var authentication =  authenticationManager.authenticate(
@@ -88,6 +89,7 @@ public class UserServiceImpl implements UserService {
                         request.getPassword()
                 )
         );
+
 
         List<String> roles = authentication.getAuthorities().stream()
                 .map(item -> item.getAuthority())
