@@ -1,8 +1,7 @@
 package schoolportalapi.portal.repository;
 
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import schoolportalapi.portal.entities.Department;
@@ -16,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
 public class StudentRepositoryTest {
-
     @Autowired
     StudentRepository studentRepository;
 
@@ -25,27 +23,31 @@ public class StudentRepositoryTest {
     void createStudent(){
 
         Department studentDept = new Department();
-        studentDept.setId(1L);
+        studentDept.setId(2L);
         studentDept.setDepartmentCode("sci");
         studentDept.setDepartmentName("Computer-sci");
 
 
         Student newStudent = new Student();
-        newStudent.setEmail("abayomexy@gmail.com");
-        newStudent.setFirstName("Akin");
+        newStudent.setEmail("mula@gmail.com");
+        newStudent.setFirstName("Laboi");
         newStudent.setLastName("Lanre");
+        newStudent.setMiddleName("mope");
         newStudent.setGender("male");
-        newStudent.setPhoneNo("08099999999");
-        newStudent.setState("Ondo");
-       // newStudent.setDateOfBirth("11/2/2023");
+        newStudent.setPhoneNo("08099994449");
+        newStudent.setState("Ikeja");
+        newStudent.setDateOfBirth("3/2/2063");
         newStudent.setEmergencyContact(0);
-        newStudent.setRegistrationNumber("fcs/sci/23/2829");
+        newStudent.setRegistrationNumber("fss/sci/23/2826");
         newStudent.setCourse("Information Technology");
-        newStudent.setYearOfRegistration("2023");
+        newStudent.setYearOfRegistration("2000");
         newStudent.setDepartment(studentDept);
 
+        System.out.println(newStudent);
+        System.out.println(2000);
         Student saveStudent = studentRepository.save(newStudent);
-
+        System.out.println(saveStudent);
+        System.out.println(2000);
         assertThat(saveStudent).isNotNull();
     }
 
@@ -59,13 +61,13 @@ public class StudentRepositoryTest {
 
 
         Student student1 = new Student();
-        student1.setEmail("abayomexy@gmail.com");
+        student1.setEmail("mavrin@gmail.com");
         student1.setFirstName("Akin");
         student1.setLastName("Lanre");
         student1.setGender("male");
         student1.setPhoneNo("08099999999");
         student1.setState("Ondo");
-       // student1.setDateOfBirth("11/2/2023");
+       student1.setDateOfBirth("11/2/2023");
         student1.setEmergencyContact(0);
         student1.setRegistrationNumber("fcs/sci/23/2829");
         student1.setCourse("Information Technology");
@@ -84,7 +86,7 @@ public class StudentRepositoryTest {
         student2.setGender("male");
         student2.setPhoneNo("08099999499");
         student2.setState("Ondo");
-       // student2.setDateOfBirth("11/2/2023");
+        student2.setDateOfBirth("11/2/2023");
         student2.setEmergencyContact(0);
         student2.setRegistrationNumber("fcs/sci/23/2829");
         student2.setCourse("Information Technology");
@@ -104,21 +106,22 @@ public class StudentRepositoryTest {
     @DisplayName("it should return a single user")
     void getStudentById(){
         Department studentDept = new Department();
-        studentDept.setId(1L);
+        studentDept.setId(2L);
         studentDept.setDepartmentCode("sci");
         studentDept.setDepartmentName("Computer-sci");
 
         Student student1 = new Student();
-        student1.setEmail("abayomexy@gmail.com");
+        student1.setEmail("bola@gmail.com");
         student1.setFirstName("Akin");
         student1.setLastName("Lanre");
         student1.setGender("male");
         student1.setPhoneNo("08099999999");
         student1.setState("Ondo");
-//        student1.setEmergencyContact(0);
+       student1.setEmergencyContact(0);
         student1.setRegistrationNumber("fcs/sci/23/2829");
         student1.setCourse("Information Technology");
         student1.setYearOfRegistration("2023");
+        student1.setDateOfBirth("11/2/2023");
         student1.setDepartment(studentDept);
 
         studentRepository.save(student1);
