@@ -37,7 +37,7 @@ public class StudentRepositoryTest {
         newStudent.setGender("male");
         newStudent.setPhoneNo("08099999999");
         newStudent.setState("Ondo");
-        newStudent.setDateOfBirth("11/2/2023");
+       // newStudent.setDateOfBirth("11/2/2023");
         newStudent.setEmergencyContact(0);
         newStudent.setRegistrationNumber("fcs/sci/23/2829");
         newStudent.setCourse("Information Technology");
@@ -65,7 +65,7 @@ public class StudentRepositoryTest {
         student1.setGender("male");
         student1.setPhoneNo("08099999999");
         student1.setState("Ondo");
-        student1.setDateOfBirth("11/2/2023");
+       // student1.setDateOfBirth("11/2/2023");
         student1.setEmergencyContact(0);
         student1.setRegistrationNumber("fcs/sci/23/2829");
         student1.setCourse("Information Technology");
@@ -84,7 +84,7 @@ public class StudentRepositoryTest {
         student2.setGender("male");
         student2.setPhoneNo("08099999499");
         student2.setState("Ondo");
-        student2.setDateOfBirth("11/2/2023");
+       // student2.setDateOfBirth("11/2/2023");
         student2.setEmergencyContact(0);
         student2.setRegistrationNumber("fcs/sci/23/2829");
         student2.setCourse("Information Technology");
@@ -115,8 +115,7 @@ public class StudentRepositoryTest {
         student1.setGender("male");
         student1.setPhoneNo("08099999999");
         student1.setState("Ondo");
-        student1.setDateOfBirth("11/2/2023");
-        student1.setEmergencyContact(0);
+//        student1.setEmergencyContact(0);
         student1.setRegistrationNumber("fcs/sci/23/2829");
         student1.setCourse("Information Technology");
         student1.setYearOfRegistration("2023");

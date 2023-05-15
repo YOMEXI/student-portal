@@ -13,6 +13,7 @@ import schoolportalapi.portal.helperMethods.studentHelperMethods;
 import schoolportalapi.portal.payload.faculty.FacultyResponseDto;
 import schoolportalapi.portal.payload.student.StudentRequestDto;
 import schoolportalapi.portal.payload.student.StudentResponseDto;
+import schoolportalapi.portal.payload.student.StudentUpdateDto;
 import schoolportalapi.portal.repository.DepartmentRepository;
 import schoolportalapi.portal.repository.FacultyRepository;
 import schoolportalapi.portal.repository.StudentRepository;
@@ -106,6 +107,26 @@ public class StudentServiceImpl implements StudentService {
         studentRepostory.deleteById(student.getId());
 
         return ResponseEntity.ok("Student deleted Successfully");
+    }
+
+    @Override
+    public ResponseEntity<?> updateStudent(Long id, StudentUpdateDto studentInfo) {
+
+        Student student = studentRepostory.findById(id)
+                .orElseThrow(()->new CustomApiException(HttpStatus.BAD_REQUEST,
+                        "Student doesnt exist"));
+
+        student.setPhoneNo(studentInfo.getPhoneNo());
+        student.setFirstName(studentInfo.getFirstName());
+        student.setLastName(studentInfo.getLastName());
+        student.setMiddleName(studentInfo.getMiddleName());
+        student.setGender(studentInfo.getGender());
+        student.setState(studentInfo.getState());
+
+        studentRepostory.save(student);
+
+
+        return   ResponseEntity.ok("Student Updated Successfully");
     }
 
 

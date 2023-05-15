@@ -1,6 +1,6 @@
 package schoolportalapi.portal.utils.constants;
 
 public class AuthConstants {
-    public static Long userRoleId = 2L;
+    public static Long userRoleId = 1L;
 
 }

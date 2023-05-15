@@ -78,8 +78,8 @@ public class Student {
     @Column()
     private String dateOfBirth;
 
-    @OneToOne()
-    @JoinColumn(name="student-department", referencedColumnName = "id", insertable = false, updatable = false)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="student-department", referencedColumnName = "id")
     private Department department;
 
 

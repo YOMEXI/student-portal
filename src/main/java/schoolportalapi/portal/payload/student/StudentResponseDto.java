@@ -10,7 +10,7 @@ public class StudentResponseDto {
     private String firstName;
 
     private String lastName;
-    private String DateOfBirth;
+
 
     private String middleName;
 
