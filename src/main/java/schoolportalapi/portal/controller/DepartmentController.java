@@ -1,6 +1,7 @@
 package schoolportalapi.portal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import schoolportalapi.portal.payload.department.DepartmentRequestDto;
@@ -18,6 +19,8 @@ public class DepartmentController {
 
     @Autowired
     DepartmentService departmentService;
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/create")
     public DepartmentResponseDto createDepartment(@Validated @RequestBody DepartmentRequestDto departmentRequestDto){
         return departmentService.createDepartment(departmentRequestDto);

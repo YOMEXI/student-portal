@@ -25,7 +25,6 @@ public class SecConfig {
     private final AuthEntryPointJwt unauthorizedHandler;
 
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -37,6 +36,7 @@ public class SecConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(  "/api/v1/role/**").permitAll()
                 .requestMatchers("/api/v1/auth/**").permitAll()
+
                 .anyRequest()
                 .authenticated()
                 .and()

@@ -5,7 +5,8 @@ import schoolportalapi.portal.entities.Student;
 
 import java.util.Optional;
 
-public interface StudentRepostory extends JpaRepository<Student,Long> {
+public interface StudentRepository extends JpaRepository<Student,Long> {
 
     Optional findByRegistrationNumber(String registrationNumber);
+    Optional findByEmail(String email);
 }

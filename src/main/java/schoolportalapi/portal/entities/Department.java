@@ -39,4 +39,6 @@ public class Department {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "faculty", nullable = false)
     private Faculty faculty;
+
+
 }

@@ -3,26 +3,30 @@ package schoolportalapi.portal.service.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import schoolportalapi.portal.entities.Department;
-import schoolportalapi.portal.entities.Faculty;
 import schoolportalapi.portal.entities.Student;
 import schoolportalapi.portal.exception.CustomApiException;
+import schoolportalapi.portal.helperMethods.ResponseHandler;
 import schoolportalapi.portal.helperMethods.studentHelperMethods;
+import schoolportalapi.portal.payload.faculty.FacultyResponseDto;
 import schoolportalapi.portal.payload.student.StudentRequestDto;
 import schoolportalapi.portal.payload.student.StudentResponseDto;
+import schoolportalapi.portal.payload.student.StudentUpdateDto;
 import schoolportalapi.portal.repository.DepartmentRepository;
 import schoolportalapi.portal.repository.FacultyRepository;
-import schoolportalapi.portal.repository.StudentRepostory;
+import schoolportalapi.portal.repository.StudentRepository;
 import schoolportalapi.portal.service.StudentService;
 
-import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentService {
     @Autowired
-    StudentRepostory studentRepostory;
+    StudentRepository studentRepostory;
     @Autowired
     DepartmentRepository departmentRepository;
     @Autowired
@@ -35,7 +39,14 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Override
-    public StudentResponseDto createStudent(StudentRequestDto studentRequestDto) {
+    public ResponseEntity<?> createStudent(StudentRequestDto studentRequestDto) {
+        var emailAlreadyUsed = studentRepostory
+                .findByEmail(studentRequestDto.getEmail());
+
+        if(emailAlreadyUsed.isPresent())
+            throw new CustomApiException(HttpStatus.BAD_REQUEST,
+                    "Student already Registered with this email Email");
+
 
         Student newStudent = new Student();
         newStudent.setFirstName(studentRequestDto.getFirstName());
@@ -66,9 +77,57 @@ public class StudentServiceImpl implements StudentService {
 
 
 
-       studentRepostory.save(newStudent);
+      var savedStudent= studentRepostory.save(newStudent);
 
 
-        return modelMapper.map(newStudent, StudentResponseDto.class);
+        return ResponseHandler.generateResponse("Student created successfully",
+                HttpStatus.CREATED,savedStudent);
     }
+
+    @Override
+    public ResponseEntity<?> allStudents() {
+
+
+        List<Student> findAllStudents = studentRepostory.findAll();
+
+        var allStudents=findAllStudents.stream()
+                .map(student -> modelMapper.map(student, StudentResponseDto.class))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(allStudents);
+    }
+
+    @Override
+    public ResponseEntity<?> deleteStudent(Long id) {
+
+        Student student = studentRepostory.findById(id)
+                .orElseThrow(()->new CustomApiException(HttpStatus.BAD_REQUEST,
+                        "Student doesnt exist"));
+
+        studentRepostory.deleteById(student.getId());
+
+        return ResponseEntity.ok("Student deleted Successfully");
+    }
+
+    @Override
+    public ResponseEntity<?> updateStudent(Long id, StudentUpdateDto studentInfo) {
+
+        Student student = studentRepostory.findById(id)
+                .orElseThrow(()->new CustomApiException(HttpStatus.BAD_REQUEST,
+                        "Student doesnt exist"));
+
+        student.setPhoneNo(studentInfo.getPhoneNo());
+        student.setFirstName(studentInfo.getFirstName());
+        student.setLastName(studentInfo.getLastName());
+        student.setMiddleName(studentInfo.getMiddleName());
+        student.setGender(studentInfo.getGender());
+        student.setState(studentInfo.getState());
+
+        studentRepostory.save(student);
+
+
+        return   ResponseEntity.ok("Student Updated Successfully");
+    }
+
+
 }

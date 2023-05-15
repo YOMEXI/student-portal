@@ -10,11 +10,9 @@ public class StudentResponseDto {
     private String firstName;
 
     private String lastName;
-    private String DateOfBirth;
+
 
     private String middleName;
-
-
 
     private String phoneNo;
 
@@ -24,7 +22,7 @@ public class StudentResponseDto {
 
     private String state;
 
-    private Long dateOfBirth;
+    private String dateOfBirth;
     private String course;
 
     private String gender;

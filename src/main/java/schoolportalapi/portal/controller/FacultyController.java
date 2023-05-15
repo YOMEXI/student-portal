@@ -16,12 +16,12 @@ public class FacultyController {
     @Autowired
     FacultyService facultyService;
 
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/create")
     public FacultyResponseDto createFaculty(@Validated @RequestBody FacultyRequestDto facultyRequestDto){
         return facultyService.createFaculty(facultyRequestDto);
     }
-    @PreAuthorize("hasAnyRole('ADMIN')")
+
     @GetMapping()
     public List<FacultyResponseDto> getAllFaculties(){
         return facultyService.AllFaculties();
