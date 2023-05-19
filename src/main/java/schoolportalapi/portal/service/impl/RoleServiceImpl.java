@@ -22,7 +22,6 @@ public class RoleServiceImpl implements RoleService {
 
         Role newRole=new Role();
         newRole.setName(roleRequestDto.getName());
-        System.out.println(roleRequestDto);
         roleRepository.save(newRole);
 
         return modelMapper.map(newRole, RoleResponseDto.class);

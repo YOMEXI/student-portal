@@ -71,7 +71,7 @@ public class Student {
     @Column(unique = true, nullable = false, length = 100)
     private String email;
     @Column(length = 20)
-    private Integer emergencyContact;
+    private String emergencyContact;
 
     @NotBlank
     @NotEmpty(message = "date of Birth cannot be empty")
