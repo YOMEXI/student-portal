@@ -29,7 +29,7 @@ public class StudentRequestDto {
 
     private String email;
 
-    private Integer emergencyContact;
+    private String emergencyContact;
 
      private Long departmentId;
 }

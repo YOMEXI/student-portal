@@ -34,7 +34,7 @@ public class SecConfig {
                 .authenticationEntryPoint(unauthorizedHandler)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers(  "/api/v1/role/**").permitAll()
+                //.requestMatchers(  "/api/v1/role/**").permitAll()
                 .requestMatchers("/api/v1/auth/**").permitAll()
 
                 .anyRequest()

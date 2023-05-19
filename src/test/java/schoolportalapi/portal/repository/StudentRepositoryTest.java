@@ -1,11 +1,12 @@
 package schoolportalapi.portal.repository;
 
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import schoolportalapi.portal.entities.Department;
+import schoolportalapi.portal.entities.Faculty;
 import schoolportalapi.portal.entities.Student;
 
 import java.util.List;
@@ -16,33 +17,80 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
 public class StudentRepositoryTest {
-
     @Autowired
     StudentRepository studentRepository;
+    @Autowired
+    DepartmentRepository departmentRepository;
+
+    @Autowired
+    FacultyRepository facultyRepository;
+
+
+    private Faculty newFac;
+
+    private Department studentDept ;
+
+    private Student student1;
+    private Student student2;
+
+   @BeforeEach
+    public void setup(){
+        newFac = new Faculty();
+       newFac.setFacultyCode("sci");
+       newFac.setFacultyName("sciences");
+
+        studentDept = new Department();
+       studentDept.setDepartmentCode("csc");
+       studentDept.setDepartmentName("Computer science");
+
+         student1 = new Student();
+        student1.setEmail("abayomexy@gmail.com");
+        student1.setFirstName("Akin");
+        student1.setLastName("Lanre");
+        student1.setGender("male");
+        student1.setPhoneNo("08099999999");
+        student1.setState("Ondo");
+        student1.setDateOfBirth("11/2/2023");
+        student1.setEmergencyContact("00");
+        student1.setRegistrationNumber("sci/csc/23/2829");
+        student1.setCourse("Information Technology");
+        student1.setYearOfRegistration("2023");
+        student1.setDepartment(studentDept);
+
+         student2 = new Student();
+        student2.setEmail("mike@gmail.com");
+        student2.setFirstName("mike");
+        student2.setLastName("mila");
+        student2.setGender("male");
+        student2.setPhoneNo("08099999499");
+        student2.setState("Ondo");
+        student2.setDateOfBirth("11/2/2023");
+        student2.setEmergencyContact("000");
+        student2.setRegistrationNumber("sci/chm/23/2829");
+        student2.setCourse("Chemistry");
+        student2.setYearOfRegistration("2023");
+        student2.setDepartment(studentDept);
+
+
+
+    }
+
 
     @Test
     @DisplayName("It should save the student to the database")
     void createStudent(){
 
-        Department studentDept = new Department();
-        studentDept.setId(1L);
-        studentDept.setDepartmentCode("sci");
-        studentDept.setDepartmentName("Computer-sci");
+        var fac = newFac;
+        var studentFaculty = facultyRepository.save(fac);
+
+        var dept = studentDept;
+        dept.setFaculty(studentFaculty);
+
+        var studentDepartment = departmentRepository.save(studentDept);
 
 
-        Student newStudent = new Student();
-        newStudent.setEmail("abayomexy@gmail.com");
-        newStudent.setFirstName("Akin");
-        newStudent.setLastName("Lanre");
-        newStudent.setGender("male");
-        newStudent.setPhoneNo("08099999999");
-        newStudent.setState("Ondo");
-       // newStudent.setDateOfBirth("11/2/2023");
-        newStudent.setEmergencyContact(0);
-        newStudent.setRegistrationNumber("fcs/sci/23/2829");
-        newStudent.setCourse("Information Technology");
-        newStudent.setYearOfRegistration("2023");
-        newStudent.setDepartment(studentDept);
+        Student newStudent = student1;
+        newStudent.setDepartment(studentDepartment);
 
         Student saveStudent = studentRepository.save(newStudent);
 
@@ -52,47 +100,26 @@ public class StudentRepositoryTest {
     @Test
     @DisplayName("It should return all Users")
     void getAllStudents(){
-        Department studentDept = new Department();
-        studentDept.setId(1L);
-        studentDept.setDepartmentCode("sci");
-        studentDept.setDepartmentName("Computer-sci");
+
+        var fac = newFac;
+        var studentFaculty = facultyRepository.save(fac);
+
+        var dept = studentDept;
+        dept.setFaculty(studentFaculty);
+
+        var studentDepartment = departmentRepository.save(studentDept);
 
 
-        Student student1 = new Student();
-        student1.setEmail("abayomexy@gmail.com");
-        student1.setFirstName("Akin");
-        student1.setLastName("Lanre");
-        student1.setGender("male");
-        student1.setPhoneNo("08099999999");
-        student1.setState("Ondo");
-       // student1.setDateOfBirth("11/2/2023");
-        student1.setEmergencyContact(0);
-        student1.setRegistrationNumber("fcs/sci/23/2829");
-        student1.setCourse("Information Technology");
-        student1.setYearOfRegistration("2023");
-        student1.setDepartment(studentDept);
+        Student firstStudent = student1;
+        firstStudent.setDepartment(studentDepartment);
 
-        studentRepository.save(student1);
+        studentRepository.save(firstStudent);
 
 
+        Student secondStudent = student2;
+        secondStudent.setDepartment(studentDepartment);
 
-
-        Student student2 = new Student();
-        student2.setEmail("mike@gmail.com");
-        student2.setFirstName("mike");
-        student2.setLastName("mila");
-        student2.setGender("male");
-        student2.setPhoneNo("08099999499");
-        student2.setState("Ondo");
-       // student2.setDateOfBirth("11/2/2023");
-        student2.setEmergencyContact(0);
-        student2.setRegistrationNumber("fcs/sci/23/2829");
-        student2.setCourse("Information Technology");
-        student2.setYearOfRegistration("2023");
-        student2.setDepartment(studentDept);
-
-
-        studentRepository.save(student2);
+         studentRepository.save(secondStudent);
 
         List<Student> list = studentRepository.findAll();
 
@@ -103,26 +130,23 @@ public class StudentRepositoryTest {
     @Test
     @DisplayName("it should return a single user")
     void getStudentById(){
-        Department studentDept = new Department();
-        studentDept.setId(1L);
-        studentDept.setDepartmentCode("sci");
-        studentDept.setDepartmentName("Computer-sci");
 
-        Student student1 = new Student();
-        student1.setEmail("abayomexy@gmail.com");
-        student1.setFirstName("Akin");
-        student1.setLastName("Lanre");
-        student1.setGender("male");
-        student1.setPhoneNo("08099999999");
-        student1.setState("Ondo");
-//        student1.setEmergencyContact(0);
-        student1.setRegistrationNumber("fcs/sci/23/2829");
-        student1.setCourse("Information Technology");
-        student1.setYearOfRegistration("2023");
-        student1.setDepartment(studentDept);
+        var fac = newFac;
+        var studentFaculty = facultyRepository.save(fac);
 
-        studentRepository.save(student1);
-        Student existingStudent = studentRepository.findById(student1.getId()).get();
+        var dept = studentDept;
+        dept.setFaculty(studentFaculty);
+
+        var studentDepartment = departmentRepository.save(studentDept);
+
+
+        Student newStudent = student1;
+        newStudent.setDepartment(studentDepartment);
+
+        Student saveStudent = studentRepository.save(newStudent);
+
+
+        Student existingStudent = studentRepository.findById(saveStudent.getId()).get();
 
         assertNotNull(existingStudent);
         assertThat("abayomexy@gmail.com").isEqualTo(existingStudent.getEmail());

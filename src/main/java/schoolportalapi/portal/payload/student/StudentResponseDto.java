@@ -30,7 +30,7 @@ public class StudentResponseDto {
 
     private String email;
 
-    private Integer emergencyContact;
+    private String emergencyContact;
 
      private Department department;
 }
